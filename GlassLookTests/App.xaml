@@ -1,0 +1,11 @@
+﻿<Application x:Class="GlassLookTests.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:GlassLookTests"
+             StartupUri="MainWindow.xaml"
+             Startup="Application_Startup">
+    <Application.Resources>
+        <BitmapImage x:Key="BackGround" UriSource="pack://application:,,,/Assets/MeshGradient_Green.jpg"/>
+        <BitmapImage x:Key="flag_placeholder" UriSource="pack://application:,,,/Assets/placeholder_flag.png"/>
+    </Application.Resources>
+</Application>
