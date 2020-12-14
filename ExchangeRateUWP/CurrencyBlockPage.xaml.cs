@@ -1,61 +1,65 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Threading;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
+using Windows.UI.Xaml.Navigation;
 
-namespace GlassLookTests
+// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
+
+namespace ExchangeRateUWP
 {
     /// <summary>
-    /// Interaction logic for CurrencyBlock.xaml
+    /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    //public class RectConvertor : IMultiValueConverter
-    //{
-    //    #region IMultiValueConverter Members
-
-    //    public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-    //    {
-    //        return new Rectangle();
-    //    }
-
-    //    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-
-    //    #endregion
-    //}
-    public partial class CurrencyBlock : UserControl
+    /// 
+    public sealed partial class CurrencyBlockPage : Page
     {
         string flagURL;
 
+        public static readonly DependencyProperty CountryNameProperty =
+               DependencyProperty.Register("CountryName", typeof(string), typeof(CurrencyBlock), new PropertyMetadata("", new PropertyChangedCallback(OnCountryNameChanged)));
 
-        BitmapImage bitmapImage = new BitmapImage();
-        public CurrencyBlock()
+        private static void OnCountryNameChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            InitializeComponent();
+
         }
-        public CurrencyBlock(string CountryName, string Rate)
+        public string CountryName
+        {
+            get { return (string)GetValue(CountryNameProperty); }
+            set { SetValue(CountryNameProperty, value); }
+        }
+
+        public static readonly DependencyProperty CurrencyRateProperty =
+            DependencyProperty.Register("CurrencyRate", typeof(string), typeof(CurrencyBlock), new PropertyMetadata(""));
+
+        public string CurrencyRate
+        {
+            get { return (string)GetValue(CurrencyRateProperty); }
+            set { SetValue(CurrencyRateProperty, value); }
+        }
+
+        public CurrencyBlockPage()
+        {
+            this.InitializeComponent();
+        }
+
+        public CurrencyBlockPage(string CountryName, string Rate)
         {
             InitializeComponent();
             this.CountryName = CountryName;
             CurrencyRate = Rate;
             flagURL = $"https://www.countryflags.io/" + GenerateFlagURL() + "/shiny/64.png";
-            bitmapImage.BeginInit();
-            bitmapImage.UriSource = new Uri(flagURL, UriKind.RelativeOrAbsolute);
-            bitmapImage.CacheOption = BitmapCacheOption.OnDemand;
-            bitmapImage.EndInit();
-            img_flag.Source = bitmapImage;
+            img_flag.Source = new BitmapImage(new Uri(flagURL));
         }
 
         public string GenerateFlagURL()
@@ -180,28 +184,6 @@ namespace GlassLookTests
                     return "";
 
             }
-        }
-
-        public static readonly DependencyProperty CountryNameProperty =
-            DependencyProperty.Register("CountryName", typeof(string), typeof(CurrencyBlock), new PropertyMetadata("", new PropertyChangedCallback(OnCountryNameChanged)));
-
-        private static void OnCountryNameChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-
-        }
-        public string CountryName
-        {
-            get { return (string)GetValue(CountryNameProperty); }
-            set { SetValue(CountryNameProperty, value); }
-        }
-
-        public static readonly DependencyProperty CurrencyRateProperty =
-            DependencyProperty.Register("CurrencyRate", typeof(string), typeof(CurrencyBlock), new PropertyMetadata(""));
-
-        public string CurrencyRate
-        {
-            get { return (string)GetValue(CurrencyRateProperty); }
-            set { SetValue(CurrencyRateProperty, value); }
         }
     }
 }

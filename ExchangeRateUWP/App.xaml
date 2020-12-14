@@ -1,0 +1,11 @@
+﻿<Application
+    x:Class="ExchangeRateUWP.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ExchangeRateUWP">
+    <Application.Resources>
+        <BitmapImage x:Key="icon_refresh" UriSource="pack://application:,,,/Assets/icon_refresh.png"/>
+        <BitmapImage x:Key="BackGroundFuchsia" UriSource="pack://application:,,,/Assets/MeshGradient_Fuchsia.jpg"/>
+        <BitmapImage x:Key="flag_placeholder" UriSource="pack://application:,,,/Assets/placeholder_flag.png"/>
+    </Application.Resources>
+</Application>

@@ -47,7 +47,7 @@
                 </Rectangle>
             </Border>
             <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" ClipToBounds="False" Grid.Row="1" Margin="5,0">
-                <UniformGrid Name="uniformGrid" Columns="3" ClipToBounds="False">
+                <UniformGrid Name="uniformGrid" Columns="3" Margin="10,0,10,0" ClipToBounds="False">
                     <local:CurrencyBlock></local:CurrencyBlock>
                     <local:CurrencyBlock></local:CurrencyBlock>
                     <local:CurrencyBlock></local:CurrencyBlock>

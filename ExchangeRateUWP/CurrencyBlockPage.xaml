@@ -1,0 +1,55 @@
+﻿<Page
+    x:Class="ExchangeRateUWP.CurrencyBlockPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ExchangeRateUWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d"
+    Name="ucCurrencyBlock"
+    Height="100" Width="350"
+    MinHeight="100" MinWidth="350">
+    <Page.Resources>
+        <ResourceDictionary>
+            <media:AcrylicBrush x:Key="CustomAcrylicBrush" BackgroundSource="Backdrop"
+            TintOpacity="0.3" TintColor="White" FallbackColor="Transparent" />
+            <media:AcrylicBrush x:Key="CustomAcrylicBrushBright" BackgroundSource="Backdrop"
+            TintOpacity="0.1" TintColor="AliceBlue" FallbackColor="Transparent" />
+        </ResourceDictionary>
+    </Page.Resources>
+    <Page.Background>
+        <ThemeResource ResourceKey="CustomAcrylicBrush"/>
+    </Page.Background>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="69"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <controls:DropShadowPanel BlurRadius="3.04"
+                                  ShadowOpacity="0.61"
+                                  OffsetX="2.17"
+                                  OffsetY="2"
+                                  Color="Black"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Left"
+                                  IsMasked="True" Grid.Column="1" Margin="78,0,0,0" Height="0" Width="0">
+            <Border BorderBrush="White" BorderThickness="0">
+                <Border.Background>
+                    <media:BackdropBlurBrush Amount="8.73" />
+                </Border.Background>
+            </Border>
+        </controls:DropShadowPanel>
+        <Rectangle Grid.ColumnSpan="2">
+        </Rectangle>
+        <Image x:Name="img_flag" Source="{StaticResource flag_placeholder}" Height="64" Width="64" Grid.Column="0" Margin="5,0,0,0" VerticalAlignment="Center">
+        </Image>
+        <TextBlock x:Name="tb_CountryName" Text="{Binding ElementName=ucCurrencyBlock,Path=CountryName,Mode=TwoWay}" Foreground="Black" Grid.Column="1" FontSize="24" Margin="5,12,0,0"/>
+        <StackPanel Grid.Column="1" Margin="5,0,0,24" VerticalAlignment="Bottom" Orientation="Horizontal">
+            <TextBlock x:Name="tb_CurrencyRate" Foreground="Black" FontFamily="Segoe UI Semibold" VerticalAlignment="Bottom" Text="{Binding ElementName=ucCurrencyBlock,Path=CurrencyRate,Mode=TwoWay}"  Grid.Column="1" FontSize="22"/>
+            <TextBlock Text=" ကျပ်" Foreground="Brown" FontSize="16" VerticalAlignment="Top" Margin="2,0,0,0"/>
+        </StackPanel>
+        <ToggleButton x:Name="btn_pin" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right" Height="20" Width="20" Margin="0,10,12,0" Background="{ThemeResource CustomAcrylicBrushBright}"/>
+        <Button x:Name="btn_calculate" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Right" Height="50" Width="50" Margin="0,40,12,15" Background="{ThemeResource CustomAcrylicBrush}"/>
+    </Grid>
+</Page>

@@ -23,7 +23,10 @@
                     <GradientStop Color="#FF6A6A6A" Offset="1"/>
                 </LinearGradientBrush>
             </Border.BorderBrush>
-            <Rectangle x:Name="mainRect">
+            <Rectangle x:Name="mainRect" ClipToBounds="True">
+                <Rectangle.Effect>
+                    <BlurEffect Radius="30"/>
+                </Rectangle.Effect>
                 <Rectangle.Fill>
                     <LinearGradientBrush EndPoint="0.989,0.982" StartPoint="0.018,0.023">
                         <GradientStop Color="#8CC3C3C3"/>
@@ -46,8 +49,8 @@
         </Image>
         <TextBlock x:Name="tb_CountryName" Text="{Binding ElementName=ucCurrencyBlock,Path=CountryName,Mode=TwoWay}"  Grid.Column="1" FontSize="18" Margin="5,9,0,0"/>
         <StackPanel Grid.Column="1" Margin="5,0,0,12" VerticalAlignment="Bottom" Orientation="Horizontal">
-            <TextBlock x:Name="tb_CurrencyRate" FontFamily="Segoe UI Light" VerticalAlignment="Bottom" Text="{Binding ElementName=ucCurrencyBlock,Path=CurrencyRate,Mode=TwoWay}"  Grid.Column="1" FontSize="12"/>
-            <TextBlock Text="MMK" Foreground="Brown" FontSize="10" VerticalAlignment="Bottom" Margin="2,0,0,0"/>
+            <TextBlock x:Name="tb_CurrencyRate" FontFamily="Segoe UI Semibold" VerticalAlignment="Bottom" Text="{Binding ElementName=ucCurrencyBlock,Path=CurrencyRate,Mode=TwoWay}"  Grid.Column="1" FontSize="16"/>
+            <TextBlock Text="ကျပ်" Foreground="Brown" FontSize="10" VerticalAlignment="Center" Margin="2,0,0,0"/>
         </StackPanel>
     </Grid>
 </UserControl>

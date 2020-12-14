@@ -1,0 +1,22 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ExchangeRateUWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Custom="using:Microsoft.Xaml.Interactivity" xmlns:Custom1="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
+    x:Class="ExchangeRateUWP.CurrencyBlock"
+    mc:Ignorable="d"
+    MinHeight="100" MinWidth="400"
+    d:DesignHeight="100"
+    d:DesignWidth="400">
+    <Grid>
+        <Rectangle Stroke="Black" RadiusX="15" RadiusY="15" Fill="{ThemeResource SystemControlAcrylicElementBrush}">
+            
+            <Custom:Interaction.Behaviors>
+                <Custom1:Blur Value="30"/>
+            </Custom:Interaction.Behaviors>
+        </Rectangle>
+
+    </Grid>
+</UserControl>

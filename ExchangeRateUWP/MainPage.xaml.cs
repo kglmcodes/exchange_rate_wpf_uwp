@@ -1,43 +1,35 @@
-﻿using Newtonsoft.Json;
+﻿using GlassLookTests;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Navigation;
 
-namespace GlassLookTests
+// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+
+namespace ExchangeRateUWP
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public partial class MainWindow : Window
+    public sealed partial class MainPage : Page
     {
-        public MainWindow()
+        public MainPage()
         {
-            InitializeComponent();
-            //Setting up the windows control buttons
-            //btn_Exit.Click += (e, s) =>
-            //{
-            //    this.Close();
-            //};
-            //btn_Minimize.Click += (e, s) =>
-            //{
-            //    this.WindowState = WindowState.Minimized;
-            //};
-            //btn_Maximize.Click += (e, s) =>
-            //{
-            //    this.WindowState = this.WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
-            //};
+            this.InitializeComponent();
+
             DisplayData();
         }
         private async Task<LatestRatesModel.LatestRate> getDeserializedLatesRates()
@@ -54,23 +46,21 @@ namespace GlassLookTests
             }
             else
             {
-                MessageBox.Show("No Internet Connection");
-                //throw new NotImplementedException();
                 return new LatestRatesModel.LatestRate();
             }
         }
 
         private async void DisplayData()
         {
-            uniformGrid.Children.Clear();
+            contentAGridView.Items.Clear();
             App.latestRates = await getDeserializedLatesRates();
             //await Task.Delay(500);
             foreach (var rate in App.latestRates.Rates)
             {
-                tryagain:
+            tryagain:
                 try
                 {
-                    uniformGrid.Children.Add(new CurrencyBlock(App.currencies.CurrencyMeaning[rate.Key], rate.Value.ToString())
+                    contentAGridView.Items.Add(new CurrencyBlockPage(App.currencies.CurrencyMeaning[rate.Key], rate.Value.ToString())
                     {
                         Name = $"uc_CB_{rate.Key}"
                     });
