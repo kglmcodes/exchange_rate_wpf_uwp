@@ -116,5 +116,11 @@
   <ItemGroup>
     <Resource Include="Assets\placeholder_flag.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\MeshGradient_Fuchsia.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Background_GIF.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

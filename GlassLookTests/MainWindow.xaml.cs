@@ -26,18 +26,18 @@ namespace GlassLookTests
         {
             InitializeComponent();
             //Setting up the windows control buttons
-            btn_Exit.Click += (e, s) =>
-            {
-                this.Close();
-            };
-            btn_Minimize.Click += (e, s) =>
-            {
-                this.WindowState = WindowState.Minimized;
-            };
-            btn_Maximize.Click += (e, s) =>
-            {
-                this.WindowState = this.WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
-            };
+            //btn_Exit.Click += (e, s) =>
+            //{
+            //    this.Close();
+            //};
+            //btn_Minimize.Click += (e, s) =>
+            //{
+            //    this.WindowState = WindowState.Minimized;
+            //};
+            //btn_Maximize.Click += (e, s) =>
+            //{
+            //    this.WindowState = this.WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+            //};
             DisplayData();
         }
         private async Task<LatestRatesModel.LatestRate> getDeserializedLatesRates()

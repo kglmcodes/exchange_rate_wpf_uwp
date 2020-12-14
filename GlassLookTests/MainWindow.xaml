@@ -4,35 +4,49 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GlassLookTests"
-        mc:Ignorable="d" WindowStyle="None"
+        mc:Ignorable="d" WindowStyle="SingleBorderWindow"
         Title="MainWindow" Height="450" Width="800">
-    <Grid Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20" />
-            <RowDefinition Height="1*" />
-        </Grid.RowDefinitions>
-        <Rectangle Fill="Aqua">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF8D0000" Offset="0"/>
+                <GradientStop Color="#FF308B4D" Offset="1"/>
+                <GradientStop Color="#FF7A4C8F" Offset="0.268"/>
+                <GradientStop Color="#FF8913AC" Offset="0.469"/>
+                <GradientStop Color="#FFD384D0" Offset="0.707"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <!--<Rectangle Fill="Aqua">
             <Rectangle.Effect>
                 <BlurEffect/>
             </Rectangle.Effect>
-        </Rectangle>
+        </Rectangle>-->
         <!--Window Control Buttons-->
-        <StackPanel x:Name="WindowsControlButtons" Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Right">
-            <Button x:Name="btn_Minimize" Width="20" Margin="0,0,5,0">
-                <TextBlock Text="-" FontSize="18"></TextBlock>
-            </Button>
-            <Button x:Name="btn_Maximize" VerticalContentAlignment="Top" Width="20" Margin="0,0,5,0">
-                <TextBlock Text="□" FontSize="16" LineHeight="6" FontWeight="Bold" VerticalAlignment="Top"></TextBlock>
-            </Button>
-            <Button x:Name="btn_Exit" Width="20" Background="#CAFF0000" >
-                <TextBlock Text="X" FontSize="12"></TextBlock>
-            </Button>
-        </StackPanel>
-        <Grid x:Name="contentGrid" Grid.Row="1">
-            <Grid.Background>
-                <ImageBrush ImageSource="Assets/MeshGradient_Green.jpg" Stretch="UniformToFill"/>
-            </Grid.Background>
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden" ClipToBounds="False">
+        <Grid x:Name="contentGrid" Margin="10,0,10,0" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Border ClipToBounds="True" BorderThickness="2,2,2,0" CornerRadius="15,15,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="5,3,5,0">
+                <Border.BorderBrush>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <GradientStop Color="#FF9C9C9C" Offset="0"/>
+                        <GradientStop Color="#FF6A6A6A" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+                <Rectangle Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="5,5,5,0">
+                    <Rectangle.Effect>
+                        <BlurEffect Radius="28" RenderingBias="Quality" KernelType="Gaussian"/>
+                    </Rectangle.Effect>
+                    <Rectangle.Fill>
+                        <LinearGradientBrush EndPoint="0.009,0.983" StartPoint="1.019,-0.001">
+                            <GradientStop Color="#5AFFFFFF" Offset="0"/>
+                            <GradientStop Color="White" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Border>
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" ClipToBounds="False" Grid.Row="1" Margin="5,0">
                 <UniformGrid Name="uniformGrid" Columns="3" ClipToBounds="False">
                     <local:CurrencyBlock></local:CurrencyBlock>
                     <local:CurrencyBlock></local:CurrencyBlock>
