@@ -127,6 +127,7 @@ namespace GlassLookTests
         //    [JsonProperty("SEK")]
         //    public string SEK { get; set; }
         //}
+        
 
         public class Currencies
         {

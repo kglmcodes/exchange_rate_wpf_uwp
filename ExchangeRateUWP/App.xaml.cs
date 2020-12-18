@@ -32,6 +32,7 @@ namespace ExchangeRateUWP
 
         public static LatestRatesModel.LatestRate latestRates;
         public static CurrenciesModel.Currencies currencies;
+        public static CurrencyDetailView currencyDetailView = new CurrencyDetailView("Blank Page");
 
         public static AllCurrencies allCurrencies = new AllCurrencies();
         /// <summary>
@@ -93,7 +94,8 @@ namespace ExchangeRateUWP
                     currencies = JsonConvert.DeserializeObject<CurrenciesModel.Currencies>(result);
                 }
             }
-
+            //load the data for pinned currencies
+            PinnedList.LoadList();
         }
 
         public static Task<LatestRatesModel.LatestRate> getDeserializedLatesRates = Task<LatestRatesModel.LatestRate>.Run(async () =>

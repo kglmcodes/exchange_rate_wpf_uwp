@@ -17,7 +17,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <ProgressBar x:Name="LoadingIndicator" VerticalAlignment="Top" IsIndeterminate="True" Height="auto" Foreground="White" MinWidth="500"></ProgressBar>
-        <controls:AdaptiveGridView x:Name="contentAGridView" Padding="7,5,7,0" HorizontalContentAlignment="Center" Grid.Row="1">
+        <controls:AdaptiveGridView x:Name="contentAGridView" HorizontalAlignment="Stretch" Padding="7,5,7,0" HorizontalContentAlignment="Center" Grid.Row="1">
             <controls:AdaptiveGridView.Background>
                 <AcrylicBrush TintColor="#FF68A864"/>
             </controls:AdaptiveGridView.Background>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -49,7 +50,7 @@ namespace ExchangeRateUWP
         }
 
         public static readonly DependencyProperty IsPinnedProperty =
-            DependencyProperty.Register("IsPinned", typeof(bool), typeof(CurrencyBlockPage), new PropertyMetadata(false, new PropertyChangedCallback(OnIsPinnedChanged)));
+            DependencyProperty.Register("IsPinned", typeof(bool), typeof(CurrencyBlockPage), new PropertyMetadata(false/*, new PropertyChangedCallback(OnIsPinnedChanged)*/));
 
         public bool IsPinned
         {
@@ -58,6 +59,17 @@ namespace ExchangeRateUWP
         }
         private static void OnIsPinnedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+            CurrencyBlockPage currencyBlockPage = new CurrencyBlockPage();
+            currencyBlockPage.onIsPinnedChangedHandler(d, e);
+        }
+
+        public void onIsPinnedChangedHandler(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if ((bool)e.NewValue)
+            {
+                Debug.WriteLine(this.CountryName + "IsPinned");
+            }
+
         }
 
         public CurrencyBlockPage()
@@ -65,138 +77,153 @@ namespace ExchangeRateUWP
             this.InitializeComponent();
         }
 
+        private void Btn_pin_Click(object sender, RoutedEventArgs e)
+        {
+            //IsPinned = !IsPinned;
+            if (IsPinned)
+            {
+                PinnedList.AddCountry(AllCurrencies.GenerateCountryAbbreviationFromCurrency(CountryName));
+                Debug.WriteLine(CountryName + " is Pinned.");
+            }
+            else
+            {
+                PinnedList.RemoveCountry(AllCurrencies.GenerateCountryAbbreviationFromCurrency(CountryName));
+                Debug.WriteLine(CountryName + " is Unpinned.");
+            }
+        }
+
         public CurrencyBlockPage(string CountryName, string Rate)
         {
             InitializeComponent();
-            IsPinned = true;
             this.CountryName = CountryName;
             CurrencyRate = Rate;
-            flagURL = $"https://www.countryflags.io/" + GenerateFlagURL() + "/shiny/64.png";
+            flagURL = $"https://www.countryflags.io/" + AllCurrencies.GenerateCountryAbbreviationFromCurrency(CountryName) + "/shiny/64.png";
             img_flag.Source = new BitmapImage(new Uri(flagURL));
+            btn_pin.Click += Btn_pin_Click;
         }
 
-        public string GenerateFlagURL()
-        {
-            switch (CountryName)
-            {
-                case "United State Dollar":
-                    return "US";
+        //public string GenerateCountryAbbreviation()
+        //{
+        //    switch (CountryName)
+        //    {
+        //        case "United State Dollar":
+        //            return "US";
 
-                case "Euro":
-                    return "EU";
+        //        case "Euro":
+        //            return "EU";
 
-                case "Singapore Dollar":
-                    return "SG";
+        //        case "Singapore Dollar":
+        //            return "SG";
 
-                case "Pound Sterling":
-                    return "GB";
+        //        case "Pound Sterling":
+        //            return "GB";
 
-                case "Swiss Franc":
-                    return "CH";
+        //        case "Swiss Franc":
+        //            return "CH";
 
-                case "Japanese Yen":
-                    return "JP";
+        //        case "Japanese Yen":
+        //            return "JP";
 
-                case "Australian Dollar":
-                    return "AU";
+        //        case "Australian Dollar":
+        //            return "AU";
 
-                case "Bangladesh Taka":
-                    return "BD";
+        //        case "Bangladesh Taka":
+        //            return "BD";
 
-                case "Brunei Dollar":
-                    return "BN";
+        //        case "Brunei Dollar":
+        //            return "BN";
 
-                case "Cambodian Riel":
-                    return "KH";
+        //        case "Cambodian Riel":
+        //            return "KH";
 
-                case "Canadian Dollar":
-                    return "CA";
+        //        case "Canadian Dollar":
+        //            return "CA";
 
-                case "Chinese Yuan":
-                    return "CN";
+        //        case "Chinese Yuan":
+        //            return "CN";
 
-                case "Hong Kong Dollar":
-                    return "HK";
+        //        case "Hong Kong Dollar":
+        //            return "HK";
 
-                case "Indian Rupee":
-                    return "IN";
+        //        case "Indian Rupee":
+        //            return "IN";
 
-                case "Indonesian Rupiah":
-                    return "ID";
+        //        case "Indonesian Rupiah":
+        //            return "ID";
 
-                case "Korean Won":
-                    return "KR";
+        //        case "Korean Won":
+        //            return "KR";
 
-                case "Lao Kip":
-                    return "LA";
+        //        case "Lao Kip":
+        //            return "LA";
 
-                case "Malaysian Ringgit":
-                    return "MY";
+        //        case "Malaysian Ringgit":
+        //            return "MY";
 
-                case "New Zealand Dollar":
-                    return "NZ";
+        //        case "New Zealand Dollar":
+        //            return "NZ";
 
-                case "Pakistani Rupee":
-                    return "PK";
+        //        case "Pakistani Rupee":
+        //            return "PK";
 
-                case "Philippines Peso":
-                    return "PH";
+        //        case "Philippines Peso":
+        //            return "PH";
 
-                case "Sri Lankan Rupee":
-                    return "LK";
+        //        case "Sri Lankan Rupee":
+        //            return "LK";
 
-                case "Thai Baht":
-                    return "TH";
+        //        case "Thai Baht":
+        //            return "TH";
 
-                case "Vietnamese Dong":
-                    return "VN";
+        //        case "Vietnamese Dong":
+        //            return "VN";
 
-                case "Brazilian Real":
-                    return "BR";
+        //        case "Brazilian Real":
+        //            return "BR";
 
-                case "Czech Koruna":
-                    return "CZ";
+        //        case "Czech Koruna":
+        //            return "CZ";
 
-                case "Danish Krone":
-                    return "DK";
+        //        case "Danish Krone":
+        //            return "DK";
 
-                case "Egyptian Pound":
-                    return "EG";
+        //        case "Egyptian Pound":
+        //            return "EG";
 
-                case "Israeli Shekel":
-                    return "IL";
+        //        case "Israeli Shekel":
+        //            return "IL";
 
-                case "Kenya Shilling":
-                    return "KE";
+        //        case "Kenya Shilling":
+        //            return "KE";
 
-                case "Kuwaiti Dinar":
-                    return "KW";
+        //        case "Kuwaiti Dinar":
+        //            return "KW";
 
-                case "Nepalese Rupee":
-                    return "NP";
+        //        case "Nepalese Rupee":
+        //            return "NP";
 
-                case "Norwegian Kroner":
-                    return "NO";
+        //        case "Norwegian Kroner":
+        //            return "NO";
 
-                case "Russian Rouble":
-                    return "RU";
+        //        case "Russian Rouble":
+        //            return "RU";
 
-                case "Saudi Arabian Riyal":
-                    return "SA";
+        //        case "Saudi Arabian Riyal":
+        //            return "SA";
 
-                case "Serbian Dinar":
-                    return "RS";
+        //        case "Serbian Dinar":
+        //            return "RS";
 
-                case "South Africa Rand":
-                    return "ZA";
+        //        case "South Africa Rand":
+        //            return "ZA";
 
-                case "Swedish Krona":
-                    return "SE";
+        //        case "Swedish Krona":
+        //            return "SE";
 
-                default:
-                    return "";
+        //        default:
+        //            return "";
 
-            }
-        }
+        //    }
+        //}
     }
 }

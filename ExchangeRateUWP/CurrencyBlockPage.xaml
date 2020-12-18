@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Name="ucCurrencyBlock"
     Height="100" Width="300"
-    MinHeight="100" MinWidth="300">
+    MinHeight="100" MinWidth="300" CornerRadius="155">
     <Page.Resources>
         <ResourceDictionary>
             <media:AcrylicBrush x:Key="CustomAcrylicBrush" BackgroundSource="Backdrop"
@@ -89,10 +89,11 @@
             </Style>
         </ResourceDictionary>
     </Page.Resources>
-    <Page.Background>
+    <!--<Page.Background>
         <ThemeResource ResourceKey="CustomAcrylicBrush"/>
-    </Page.Background>
-    <Grid>
+    </Page.Background>-->
+    <Border CornerRadius="5">
+        <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="69"/>
             <ColumnDefinition Width="*"/>
@@ -112,15 +113,15 @@
                 </Border.Background>
             </Border>
         </controls:DropShadowPanel>
-        <Rectangle Grid.ColumnSpan="2"/>
+        <Rectangle Grid.ColumnSpan="3" RadiusX="5" RadiusY="5"/>
         <Image x:Name="img_flag" Source="{StaticResource flag_placeholder}" Height="64" Width="64" Grid.Column="0" Margin="5,0,0,0" VerticalAlignment="Center">
         </Image>
         <TextBlock x:Name="tb_CountryName" Text="{Binding ElementName=ucCurrencyBlock,Path=CountryName,Mode=TwoWay}" Foreground="Black" Grid.Column="1" Grid.ColumnSpan="2" FontSize="24"  Margin="5,12,0,0"/>
         <StackPanel Grid.Column="1" Margin="5,0,0,24" VerticalAlignment="Bottom" Orientation="Horizontal" >
-            <TextBlock x:Name="tb_CurrencyRate" Foreground="Black" FontFamily="Segoe UI Semibold" VerticalAlignment="Bottom" Text="{Binding ElementName=ucCurrencyBlock,Path=CurrencyRate,Mode=TwoWay}" TextWrapping="WrapWholeWords" Grid.Column="1" FontSize="22"/>
+            <TextBlock x:Name="tb_CurrencyRate" Foreground="Black" FontFamily="Segoe UI Semibold" VerticalAlignment="Bottom" Text="{Binding ElementName=ucCurrencyBlock,Path=CurrencyRate,Mode=OneWay}" TextWrapping="WrapWholeWords" Grid.Column="1" FontSize="22"/>
             <TextBlock Text="ကျပ်" Foreground="#88000000" FontSize="16" VerticalAlignment="Top" Margin="2,0,0,0"/>
         </StackPanel>
-        <ToggleButton Style="{StaticResource ToggleButtonStyle1}" x:Name="btn_pin" Grid.Column="1" IsChecked="{Binding ElementName=ucCurrencyBlock,Path=IsPinned,Mode=OneWay}" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Right"  Margin="0,0,10,10" BorderBrush="Transparent" Background="Transparent">
+        <ToggleButton Style="{StaticResource ToggleButtonStyle1}" x:Name="btn_pin" Grid.Column="1" IsChecked="{Binding ElementName=ucCurrencyBlock,Path=IsPinned,Mode=TwoWay}" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Right"  Margin="0,0,10,10" BorderBrush="Transparent" Background="Transparent">
             <SymbolIcon Symbol="Pin" />
         </ToggleButton>
         <!--<Button x:Name="btn_pin2" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right" Height="20" Width="20" Margin="0,10,10,10" BorderBrush="Transparent" Background="Transparent">
@@ -129,4 +130,5 @@
         
         <!--<Button x:Name="btn_calculate" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Right" Height="50" Width="50" Margin="0,40,12,15" Background="{ThemeResource CustomAcrylicBrush}"/>-->
     </Grid>
+    </Border>
 </Page>
