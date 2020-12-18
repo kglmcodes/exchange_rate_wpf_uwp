@@ -27,7 +27,7 @@ namespace ExchangeRateUWP
         string flagURL;
 
         public static readonly DependencyProperty CountryNameProperty =
-               DependencyProperty.Register("CountryName", typeof(string), typeof(CurrencyBlock), new PropertyMetadata("", new PropertyChangedCallback(OnCountryNameChanged)));
+               DependencyProperty.Register("CountryName", typeof(string), typeof(CurrencyBlockPage), new PropertyMetadata("", new PropertyChangedCallback(OnCountryNameChanged)));
 
         private static void OnCountryNameChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -40,12 +40,24 @@ namespace ExchangeRateUWP
         }
 
         public static readonly DependencyProperty CurrencyRateProperty =
-            DependencyProperty.Register("CurrencyRate", typeof(string), typeof(CurrencyBlock), new PropertyMetadata(""));
+            DependencyProperty.Register("CurrencyRate", typeof(string), typeof(CurrencyBlockPage), new PropertyMetadata(""));
 
         public string CurrencyRate
         {
             get { return (string)GetValue(CurrencyRateProperty); }
             set { SetValue(CurrencyRateProperty, value); }
+        }
+
+        public static readonly DependencyProperty IsPinnedProperty =
+            DependencyProperty.Register("IsPinned", typeof(bool), typeof(CurrencyBlockPage), new PropertyMetadata(false, new PropertyChangedCallback(OnIsPinnedChanged)));
+
+        public bool IsPinned
+        {
+            get { return (bool)GetValue(IsPinnedProperty); }
+            set { SetValue(IsPinnedProperty, value); }
+        }
+        private static void OnIsPinnedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
         }
 
         public CurrencyBlockPage()
@@ -56,6 +68,7 @@ namespace ExchangeRateUWP
         public CurrencyBlockPage(string CountryName, string Rate)
         {
             InitializeComponent();
+            IsPinned = true;
             this.CountryName = CountryName;
             CurrencyRate = Rate;
             flagURL = $"https://www.countryflags.io/" + GenerateFlagURL() + "/shiny/64.png";

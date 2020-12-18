@@ -12,30 +12,22 @@
     </Page.Background>
     <Page.Resources>
         <AcrylicBrush x:Key="NavigationViewDefaultPaneBackground"
-              BackgroundSource="Backdrop" TintColor="Blue" TintOpacity=".6"/>
+              BackgroundSource="Backdrop" TintColor="#FF2C5641" TintOpacity="0.645"/>
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <NavigationView Grid.RowSpan="3" Grid.ColumnSpan="2">
-            <NavigationView.Background>
-                <AcrylicBrush TintColor="#FF1DA1F2" TintOpacity="0.625"/>
-            </NavigationView.Background>
-            <!--<StackPanel Orientation="Horizontal" Margin="15,5,0,5">
-                <TextBlock Text="Updated at : " VerticalAlignment="Center" Foreground="#99000000" FontSize="16"/>
-                <TextBlock x:Name="tb_status" Text="No Information" Margin="4,0,0,0" VerticalAlignment="Center" Foreground="Green" FontSize="16"/>
-                --><!--<Button x:Name="btn_refresh" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="40" MinWidth="50" Margin="30,5,0,5">
-                <Button.Content>
-                    <Image Source="{StaticResource icon_refresh}" Stretch="UniformToFill" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-                </Button.Content>
-            </Button>--><!--
-            </StackPanel>-->
-            <controls:AdaptiveGridView x:Name="contentAGridView" Margin="15,5,15,0" Grid.Row="1">
-                <local:CurrencyBlockPage></local:CurrencyBlockPage>
-                <Image Source="{StaticResource icon_refresh}" Stretch="UniformToFill" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-            </controls:AdaptiveGridView>
+        <NavigationView Name="mainPageNavigationView" Grid.RowSpan="3" Grid.ColumnSpan="2" IsBackButtonVisible="Collapsed" IsBackEnabled="False" ExpandedModeThresholdWidth="300"
+                        PaneDisplayMode="LeftCompact" HorizontalContentAlignment="Center">
+            <!--<NavigationView.Background>
+                <AcrylicBrush TintColor="#FF5F995B" TintOpacity="0.625"/>
+            </NavigationView.Background>-->
+            <NavigationView.MenuItems>
+                <NavigationViewItem Icon="ViewAll" Content="View All" Tag="All_Currencies"/>
+                <NavigationViewItem Icon="Pin" Content="Pinned Currencies" Tag="Pinned_Currencies"/>
+            </NavigationView.MenuItems>
         </NavigationView>
     </Grid>
 </Page>

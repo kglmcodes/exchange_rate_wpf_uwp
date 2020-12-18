@@ -7,14 +7,86 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     Name="ucCurrencyBlock"
-    Height="100" Width="350"
-    MinHeight="100" MinWidth="350">
+    Height="100" Width="300"
+    MinHeight="100" MinWidth="300">
     <Page.Resources>
         <ResourceDictionary>
             <media:AcrylicBrush x:Key="CustomAcrylicBrush" BackgroundSource="Backdrop"
             TintOpacity="0.3" TintColor="White" FallbackColor="Transparent" />
             <media:AcrylicBrush x:Key="CustomAcrylicBrushBright" BackgroundSource="Backdrop"
             TintOpacity="0.1" TintColor="AliceBlue" FallbackColor="Transparent" />
+            <Style x:Key="ToggleButtonStyle1" TargetType="ToggleButton">
+                <Setter Property="Background" Value="{ThemeResource ToggleButtonBackground}"/>
+                <Setter Property="BackgroundSizing" Value="OuterBorderEdge"/>
+                <Setter Property="Foreground" Value="{ThemeResource ToggleButtonForeground}"/>
+                <Setter Property="BorderBrush" Value="{ThemeResource ToggleButtonBorderBrush}"/>
+                <Setter Property="BorderThickness" Value="{ThemeResource ToggleButtonBorderThemeThickness}"/>
+                <Setter Property="Padding" Value="{StaticResource ButtonPadding}"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+                <Setter Property="FontWeight" Value="Normal"/>
+                <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+                <Setter Property="FocusVisualMargin" Value="-3"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ToggleButton">
+                            <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" BackgroundSizing="{TemplateBinding BackgroundSizing}" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" CornerRadius="{TemplateBinding CornerRadius}" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <Storyboard>
+                                                <PointerUpThemeAnimation Storyboard.TargetName="ContentPresenter"/>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <Storyboard>
+                                                <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonBackgroundPressed}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="BorderBrush">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonBorderBrushPressed}"/>
+                                                </ObjectAnimationUsingKeyFrames>-->
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonForegroundPressed}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <PointerDownThemeAnimation Storyboard.TargetName="ContentPresenter"/>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Disabled">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonBackgroundDisabled}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonForegroundDisabled}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="BorderBrush">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonBorderBrushDisabled}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Checked">
+                                            <Storyboard>
+                                                <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonBackgroundChecked}"/>
+                                                </ObjectAnimationUsingKeyFrames>-->
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="Salmon"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="BorderBrush">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonBorderBrushChecked}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <PointerUpThemeAnimation Storyboard.TargetName="ContentPresenter"/>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                            </ContentPresenter>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </Page.Resources>
     <Page.Background>
@@ -23,8 +95,8 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="69"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
         <controls:DropShadowPanel BlurRadius="3.04"
                                   ShadowOpacity="0.61"
@@ -40,16 +112,21 @@
                 </Border.Background>
             </Border>
         </controls:DropShadowPanel>
-        <Rectangle Grid.ColumnSpan="2">
-        </Rectangle>
+        <Rectangle Grid.ColumnSpan="2"/>
         <Image x:Name="img_flag" Source="{StaticResource flag_placeholder}" Height="64" Width="64" Grid.Column="0" Margin="5,0,0,0" VerticalAlignment="Center">
         </Image>
-        <TextBlock x:Name="tb_CountryName" Text="{Binding ElementName=ucCurrencyBlock,Path=CountryName,Mode=TwoWay}" Foreground="Black" Grid.Column="1" FontSize="24" Margin="5,12,0,0"/>
-        <StackPanel Grid.Column="1" Margin="5,0,0,24" VerticalAlignment="Bottom" Orientation="Horizontal">
-            <TextBlock x:Name="tb_CurrencyRate" Foreground="Black" FontFamily="Segoe UI Semibold" VerticalAlignment="Bottom" Text="{Binding ElementName=ucCurrencyBlock,Path=CurrencyRate,Mode=TwoWay}"  Grid.Column="1" FontSize="22"/>
-            <TextBlock Text=" ကျပ်" Foreground="Brown" FontSize="16" VerticalAlignment="Top" Margin="2,0,0,0"/>
+        <TextBlock x:Name="tb_CountryName" Text="{Binding ElementName=ucCurrencyBlock,Path=CountryName,Mode=TwoWay}" Foreground="Black" Grid.Column="1" Grid.ColumnSpan="2" FontSize="24"  Margin="5,12,0,0"/>
+        <StackPanel Grid.Column="1" Margin="5,0,0,24" VerticalAlignment="Bottom" Orientation="Horizontal" >
+            <TextBlock x:Name="tb_CurrencyRate" Foreground="Black" FontFamily="Segoe UI Semibold" VerticalAlignment="Bottom" Text="{Binding ElementName=ucCurrencyBlock,Path=CurrencyRate,Mode=TwoWay}" TextWrapping="WrapWholeWords" Grid.Column="1" FontSize="22"/>
+            <TextBlock Text="ကျပ်" Foreground="#88000000" FontSize="16" VerticalAlignment="Top" Margin="2,0,0,0"/>
         </StackPanel>
-        <ToggleButton x:Name="btn_pin" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right" Height="20" Width="20" Margin="0,10,12,0" Background="{ThemeResource CustomAcrylicBrushBright}"/>
-        <Button x:Name="btn_calculate" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Right" Height="50" Width="50" Margin="0,40,12,15" Background="{ThemeResource CustomAcrylicBrush}"/>
+        <ToggleButton Style="{StaticResource ToggleButtonStyle1}" x:Name="btn_pin" Grid.Column="1" IsChecked="{Binding ElementName=ucCurrencyBlock,Path=IsPinned,Mode=OneWay}" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Right"  Margin="0,0,10,10" BorderBrush="Transparent" Background="Transparent">
+            <SymbolIcon Symbol="Pin" />
+        </ToggleButton>
+        <!--<Button x:Name="btn_pin2" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right" Height="20" Width="20" Margin="0,10,10,10" BorderBrush="Transparent" Background="Transparent">
+            <SymbolIcon Symbol="Pin" Width="106" Height="62" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Button>-->
+        
+        <!--<Button x:Name="btn_calculate" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Right" Height="50" Width="50" Margin="0,40,12,15" Background="{ThemeResource CustomAcrylicBrush}"/>-->
     </Grid>
 </Page>

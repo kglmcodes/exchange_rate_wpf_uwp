@@ -9,6 +9,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -26,52 +27,85 @@ namespace ExchangeRateUWP
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private NavigationViewItem _lastItem;
         public MainPage()
         {
             this.InitializeComponent();
-
-            DisplayData();
-        }
-        private async Task<LatestRatesModel.LatestRate> getDeserializedLatesRates()
-        {
-            if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() == true)
-            {
-                using (HttpClient client = new HttpClient())
-                using (HttpResponseMessage responseMessage = await client.GetAsync(App.latesRateURL))
-                using (HttpContent content = responseMessage.Content)
-                {
-                    string result = await content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<LatestRatesModel.LatestRate>(result);
-                }
-            }
-            else
-            {
-                return new LatestRatesModel.LatestRate();
-            }
+            
+            mainPageNavigationView.Content = App.allCurrencies;
+            mainPageNavigationView.ItemInvoked += MainPageNavigationView_ItemInvoked;
+            //contentAGridView.Loaded += (s, e) => { DisplayData(); };
         }
 
-        private async void DisplayData()
+        private void MainPageNavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
-            contentAGridView.Items.Clear();
-            App.latestRates = await getDeserializedLatesRates();
-            //await Task.Delay(500);
-            foreach (var rate in App.latestRates.Rates)
+            var item = args.InvokedItemContainer as NavigationViewItem;
+            if (item == null)
             {
-            tryagain:
-                try
-                {
-                    contentAGridView.Items.Add(new CurrencyBlockPage(App.currencies.CurrencyMeaning[rate.Key], rate.Value.ToString())
-                    {
-                        Name = $"uc_CB_{rate.Key}"
-                    });
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.ToString());
-                    await Task.Delay(500);
-                    goto tryagain;
-                }
+                mainPageNavigationView.Content = null;
+                return;
             }
+            if (item==_lastItem)
+            {
+                //this will be where we check if the last item is the all currencies or not and try to add a refresh function
+                return;
+            }
+            if (item.Tag.ToString() == "All_Currencies")
+            {
+                mainPageNavigationView.Content = App.allCurrencies;
+            }
+            _lastItem = item;
         }
+        //private async Task<LatestRatesModel.LatestRate> getDeserializedLatesRates()
+        //{
+        //    if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() == true)
+        //    {
+        //        using (HttpClient client = new HttpClient())
+        //        using (HttpResponseMessage responseMessage = await client.GetAsync(App.latesRateURL))
+        //        using (HttpContent content = responseMessage.Content)
+        //        {
+        //            string result = await content.ReadAsStringAsync();
+        //            return JsonConvert.DeserializeObject<LatestRatesModel.LatestRate>(result);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        await new MessageDialog("No Connection.").ShowAsync();
+        //        return new LatestRatesModel.LatestRate();
+        //    }
+        //}
+
+        //private async void DisplayData()
+        //{
+        //    //contentAGridView.Items.Clear();
+        //    try
+        //    {
+        //        //LoadingIndicator.Visibility = Visibility.Visible;
+        //        //await LongOperationAsync();
+        //        App.latestRates = await App.getDeserializedLatesRates;
+        //    }
+        //    finally
+        //    {
+        //        //LoadingIndicator.Visibility = Visibility.Collapsed;
+        //    }
+        //    //await Task.Delay(500);
+        //    foreach (var rate in App.latestRates.Rates)
+        //    {
+        //    tryagain:
+        //        try
+        //        {
+        //            contentAGridView.Items.Add(new CurrencyBlockPage(App.currencies.CurrencyMeaning[rate.Key], rate.Value.ToString())
+        //            {
+        //                Name = $"uc_CB_{rate.Key}"
+        //            });
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            Console.WriteLine(e.ToString());
+        //            await Task.Delay(500);
+        //            goto tryagain;
+        //        }
+        //    }
+        //}
     }
 }

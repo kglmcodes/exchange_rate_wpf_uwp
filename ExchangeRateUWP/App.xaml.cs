@@ -6,10 +6,12 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -30,6 +32,8 @@ namespace ExchangeRateUWP
 
         public static LatestRatesModel.LatestRate latestRates;
         public static CurrenciesModel.Currencies currencies;
+
+        public static AllCurrencies allCurrencies = new AllCurrencies();
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -91,6 +95,26 @@ namespace ExchangeRateUWP
             }
 
         }
+
+        public static Task<LatestRatesModel.LatestRate> getDeserializedLatesRates = Task<LatestRatesModel.LatestRate>.Run(async () =>
+        {
+            if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() == true)
+            {
+                using (HttpClient client = new HttpClient())
+                using (HttpResponseMessage responseMessage = await client.GetAsync(App.latesRateURL))
+                using (HttpContent content = responseMessage.Content)
+                {
+                    string result = await content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<LatestRatesModel.LatestRate>(result);
+                }
+            }
+            else
+            {
+                await new MessageDialog("No Connection.").ShowAsync();
+                return new LatestRatesModel.LatestRate();
+            }
+        }
+        );
 
         /// <summary>
         /// Invoked when Navigation to a certain page fails
