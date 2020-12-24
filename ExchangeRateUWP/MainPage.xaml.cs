@@ -33,14 +33,37 @@ namespace ExchangeRateUWP
                 //this will be where we check if the last item is the all currencies or not and try to add a refresh function
                 return;
             }
-            if (item.Tag.ToString() == "All_Currencies")
+
+            switch (item.Content)
             {
-                mainPageNavigationView.Content = App.allCurrencies;
+                case "View All":
+                    mainPageNavigationView.Content = App.allCurrencies;
+                    break;
+                case "Pinned Currencies":
+                    mainPageNavigationView.Content = App.pinnedListPage;
+                    break;
+                case "Settings":
+                    mainPageNavigationView.Content = new Page();
+                    break;
+                case "Last Week":
+                    mainPageNavigationView.Content = App.historyPage;
+                    break;
+                default:
+                    break;
             }
-            if (item.Tag.ToString() == "Pinned_Currencies")
-            {
-                mainPageNavigationView.Content = App.currencyDetailView;
-            }
+
+            //if (item.Content.ToString() == "All Currencies")
+            //{
+            //}
+            //if (item.Tag.ToString() == "Pinned Currencies")
+            //{
+            //    mainPageNavigationView.Content = App.pinnedListPage;
+            //    //mainPageNavigationView.Content = App.currencyDetailView;
+            //}
+            //if (item.)
+            //{
+
+            //}
             _lastItem = item;
         }
         public static void ShowDetaildView(object sender)

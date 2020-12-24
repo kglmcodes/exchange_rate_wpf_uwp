@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="ExchangeRateUWP.PinnedList"
+    x:Class="ExchangeRateUWP.PinnedListPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:ExchangeRateUWP"
@@ -9,7 +9,9 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <controls:AdaptiveGridView>
-        </controls:AdaptiveGridView>
+        <Grid.Background>
+            <AcrylicBrush FallbackColor="#FF173F5F" TintColor="#99173F5F" TintLuminosityOpacity="0.5" BackgroundSource="HostBackdrop" TintOpacity="0.7"/>
+        </Grid.Background>
+        <controls:AdaptiveGridView x:Name="contentGrid"></controls:AdaptiveGridView >
     </Grid>
 </Page>

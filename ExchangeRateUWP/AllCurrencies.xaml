@@ -6,24 +6,35 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
+    Name="uc_allCurrencies"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
         <Grid.Background>
-            <AcrylicBrush TintColor="#FF68A864"/>
+            <AcrylicBrush FallbackColor="#FF173F5F" TintColor="#99173F5F" TintLuminosityOpacity="0.5" BackgroundSource="HostBackdrop" TintOpacity="0.7"/>
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <ProgressBar x:Name="LoadingIndicator" VerticalAlignment="Top" IsIndeterminate="True" Height="auto" Foreground="White" MinWidth="500"></ProgressBar>
         <controls:AdaptiveGridView x:Name="contentAGridView" HorizontalAlignment="Stretch" Padding="7,5,7,0" HorizontalContentAlignment="Center" Grid.Row="1">
-            <controls:AdaptiveGridView.Background>
-                <AcrylicBrush TintColor="#FF68A864"/>
-            </controls:AdaptiveGridView.Background>
+            <!--<controls:AdaptiveGridView.Background>
+                <AcrylicBrush TintColor="#FF173F5F"/>
+            </controls:AdaptiveGridView.Background>-->
             <!--<Button HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                             <SymbolIcon Symbol="Pin" VerticalAlignment="Center"  HorizontalAlignment="Center"/>
                         </Button>-->
         </controls:AdaptiveGridView>
+        <Grid x:Name="bottonGrid" VerticalAlignment="Bottom" Grid.Row="2">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Refreshed at :" FontSize="20" Margin="12,0,0,2" VerticalAlignment="Bottom"/>
+                <TextBlock x:Name="tb_refreshedTime" Text="{Binding ElementName=uc_allCurrencies, Path=TimeRefreshed}" VerticalAlignment="Bottom" FontSize="20" Margin="5,0,0,2"/>
+                <Button Margin="5,0,0,0" x:Name="btn_refreshRate">
+                    <SymbolIcon Symbol="Refresh"></SymbolIcon>
+                </Button>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

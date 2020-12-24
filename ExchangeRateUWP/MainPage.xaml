@@ -21,12 +21,16 @@
         </Grid.RowDefinitions>
         <NavigationView Name="mainPageNavigationView" Grid.RowSpan="3" Grid.ColumnSpan="2" IsBackButtonVisible="Collapsed" IsBackEnabled="False" ExpandedModeThresholdWidth="300"
                         PaneDisplayMode="LeftCompact" HorizontalContentAlignment="Center">
+            <NavigationView.PaneHeader>
+                <Image Source="{StaticResource icon_KyiYaAung}"/>
+            </NavigationView.PaneHeader>
             <!--<NavigationView.Background>
                 <AcrylicBrush TintColor="#FF5F995B" TintOpacity="0.625"/>
             </NavigationView.Background>-->
             <NavigationView.MenuItems>
                 <NavigationViewItem Icon="ViewAll" Content="View All" Tag="All_Currencies"/>
                 <NavigationViewItem Icon="Pin" Content="Pinned Currencies" Tag="Pinned_Currencies"/>
+                <NavigationViewItem Icon="CalendarWeek" Content="Last Week" Tag="Last_Week"/>
             </NavigationView.MenuItems>
         </NavigationView>
     </Grid>

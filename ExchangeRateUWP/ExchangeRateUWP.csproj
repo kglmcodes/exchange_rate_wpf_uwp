@@ -123,22 +123,22 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Currencies.cs" />
-    <Compile Include="CurrencyBlock.xaml.cs">
-      <DependentUpon>CurrencyBlock.xaml</DependentUpon>
-    </Compile>
     <Compile Include="CurrencyBlockPage.xaml.cs">
       <DependentUpon>CurrencyBlockPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="CurrencyDetailView.xaml.cs">
       <DependentUpon>CurrencyDetailView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HistoryPage.xaml.cs">
+      <DependentUpon>HistoryPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LatestRates.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="PinnedList.cs" />
-    <Compile Include="PinnedList.xaml.cs">
-      <DependentUpon>PinnedList.xaml</DependentUpon>
+    <Compile Include="PinnedListPage.xaml.cs">
+      <DependentUpon>PinnedListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -149,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\icon_refresh.png" />
+    <Content Include="Assets\KyiYaAungLogo-NameH_TransParentBG.png" />
     <Content Include="Assets\MeshGradient_Fuchsia.jpg" />
     <Content Include="Assets\placeholder_flag.png" />
     <Content Include="Properties\Default.rd.xml" />
@@ -169,10 +170,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CurrencyBlock.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="CurrencyBlockPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -181,11 +178,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="HistoryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PinnedList.xaml">
+    <Page Include="PinnedListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -80,6 +80,20 @@
                                                 <PointerUpThemeAnimation Storyboard.TargetName="ContentPresenter"/>
                                             </Storyboard>
                                         </VisualState>
+                                        <VisualState x:Name="Unchecked">
+                                            <Storyboard>
+                                                <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonBackgroundChecked}"/>
+                                                </ObjectAnimationUsingKeyFrames>-->
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="Salmon"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="BorderBrush">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonBorderBrushChecked}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <PointerUpThemeAnimation Storyboard.TargetName="ContentPresenter"/>
+                                            </Storyboard>
+                                        </VisualState>
                                     </VisualStateGroup>
                                 </VisualStateManager.VisualStateGroups>
                             </ContentPresenter>
@@ -92,34 +106,23 @@
     <!--<Page.Background>
         <ThemeResource ResourceKey="CustomAcrylicBrush"/>
     </Page.Background>-->
-    <Border CornerRadius="5">
+    <Border CornerRadius="5" >
+        <Border.Background>
+            <AcrylicBrush BackgroundSource="HostBackdrop" TintColor="#99173F5F" TintOpacity="0.85"/>
+        </Border.Background>
         <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="69"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="30"/>
-        </Grid.ColumnDefinitions>
-        <controls:DropShadowPanel BlurRadius="3.04"
-                                  ShadowOpacity="0.61"
-                                  OffsetX="2.17"
-                                  OffsetY="2"
-                                  Color="Black"
-                                  VerticalAlignment="Center"
-                                  HorizontalAlignment="Left"
-                                  IsMasked="True" Grid.Column="1" Margin="78,0,0,0" Height="0" Width="0">
-            <Border BorderBrush="White" BorderThickness="0">
-                <Border.Background>
-                    <media:BackdropBlurBrush Amount="8.73" />
-                </Border.Background>
-            </Border>
-        </controls:DropShadowPanel>
-        <Rectangle Grid.ColumnSpan="3" RadiusX="5" RadiusY="5"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="69"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="30"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Grid.ColumnSpan="3" RadiusX="5" RadiusY="5"/>
         <Image x:Name="img_flag" Source="{StaticResource flag_placeholder}" Height="64" Width="64" Grid.Column="0" Margin="5,0,0,0" VerticalAlignment="Center">
         </Image>
-        <TextBlock x:Name="tb_CountryName" Text="{Binding ElementName=ucCurrencyBlock,Path=CountryName,Mode=TwoWay}" Foreground="Black" Grid.Column="1" Grid.ColumnSpan="2" FontSize="24"  Margin="5,12,0,0"/>
+        <TextBlock x:Name="tb_CountryName" Text="{Binding ElementName=ucCurrencyBlock,Path=CountryName,Mode=TwoWay}" Foreground="White" Grid.Column="1" Grid.ColumnSpan="2" FontSize="24"  Margin="5,12,0,0"/>
         <StackPanel Grid.Column="1" Margin="5,0,0,24" VerticalAlignment="Bottom" Orientation="Horizontal" >
-            <TextBlock x:Name="tb_CurrencyRate" Foreground="Black" FontFamily="Segoe UI Semibold" VerticalAlignment="Bottom" Text="{Binding ElementName=ucCurrencyBlock,Path=CurrencyRate,Mode=OneWay}" TextWrapping="WrapWholeWords" Grid.Column="1" FontSize="22"/>
-            <TextBlock Text="ကျပ်" Foreground="#88000000" FontSize="16" VerticalAlignment="Top" Margin="2,0,0,0"/>
+            <TextBlock x:Name="tb_CurrencyRate" Foreground="White" FontFamily="Segoe UI Semibold" VerticalAlignment="Bottom" Text="{Binding ElementName=ucCurrencyBlock,Path=CurrencyRate,Mode=OneWay}" TextWrapping="WrapWholeWords" Grid.Column="1" FontSize="22"/>
+            <TextBlock Text="ကျပ်" Foreground="#88FFFF" FontSize="16" VerticalAlignment="Top" Margin="2,0,0,0"/>
         </StackPanel>
         <ToggleButton Style="{StaticResource ToggleButtonStyle1}" x:Name="btn_pin" Grid.Column="1" IsChecked="{Binding ElementName=ucCurrencyBlock,Path=IsPinned,Mode=TwoWay}" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Right"  Margin="0,0,10,10" BorderBrush="Transparent" Background="Transparent">
             <SymbolIcon Symbol="Pin" />

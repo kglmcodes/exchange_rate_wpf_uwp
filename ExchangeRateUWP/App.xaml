@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:ExchangeRateUWP">
     <Application.Resources>
+        <BitmapImage x:Key="icon_KyiYaAung" UriSource="pack://application:,,,/Assets/KyiYaAungLogo-NameH_TransParentBG.png"/>
         <BitmapImage x:Key="icon_refresh" UriSource="pack://application:,,,/Assets/icon_refresh.png"/>
         <BitmapImage x:Key="BackGroundFuchsia" UriSource="pack://application:,,,/Assets/MeshGradient_Fuchsia.jpg"/>
         <BitmapImage x:Key="flag_placeholder" UriSource="pack://application:,,,/Assets/placeholder_flag.png"/>

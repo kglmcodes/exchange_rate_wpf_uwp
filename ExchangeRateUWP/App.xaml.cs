@@ -32,9 +32,11 @@ namespace ExchangeRateUWP
 
         public static LatestRatesModel.LatestRate latestRates;
         public static CurrenciesModel.Currencies currencies;
+        public static PinnedListPage pinnedListPage = new PinnedListPage();
         public static CurrencyDetailView currencyDetailView = new CurrencyDetailView("Blank Page");
-
         public static AllCurrencies allCurrencies = new AllCurrencies();
+        public static HistoryPage historyPage = new HistoryPage();
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -95,7 +97,7 @@ namespace ExchangeRateUWP
                 }
             }
             //load the data for pinned currencies
-            PinnedList.LoadList();
+            await PinnedList.LoadList();
         }
 
         public static Task<LatestRatesModel.LatestRate> getDeserializedLatesRates = Task<LatestRatesModel.LatestRate>.Run(async () =>

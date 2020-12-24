@@ -15,11 +15,16 @@ namespace ExchangeRateUWP
     static class PinnedList
     {
         static string fileName = "pinnedCurrencies";
-        public static List<string> AbbList = new List<string>();
+        private static List<string> _abbList = new List<string>();
+        public static List<string> AbbList
+        {
+            get { return _abbList; }
+            set { _abbList = value; }
+        }
 
         public static void AddCountry(string countryName)
         {
-            if (!AbbList.Contains(countryName))
+            if (AbbList == null || !AbbList.Contains(countryName))
             {
                 AbbList.Add(countryName);
                 SaveList();

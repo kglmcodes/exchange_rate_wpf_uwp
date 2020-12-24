@@ -24,19 +24,55 @@ namespace ExchangeRateUWP
     /// </summary>
     public sealed partial class AllCurrencies : Page
     {
+        public static readonly DependencyProperty TimeRefreshedProperty =
+              DependencyProperty.Register("TimeRefreshed", typeof(string), typeof(AllCurrencies), new PropertyMetadata(""));
+
+        public string TimeRefreshed
+        {
+            get { return (string)GetValue(TimeRefreshedProperty); }
+            set { SetValue(TimeRefreshedProperty, value); }
+        }
         public AllCurrencies()
         {
             this.InitializeComponent();
             contentAGridView.Loaded += (s, e) => { DisplayData(); };
+            contentAGridView.Unloaded += ContentAGridView_Unloaded;
+            btn_refreshRate.Click += (s, e) => { DisplayData(true); };
         }
-        private async void DisplayData()
+
+        private void ContentAGridView_Unloaded(object sender, RoutedEventArgs e)
         {
+            //contentAGridView.Items.Clear();
+        }
+
+        private async void DisplayData(bool Refresh = false)
+        {
+            LoadingIndicator.Visibility = Visibility.Visible;
             //contentAGridView.Items.Clear();
             try
             {
                 //LoadingIndicator.Visibility = Visibility.Visible;
-                //await LongOperationAsync();
-                App.latestRates = await App.getDeserializedLatesRates;
+                ////await LongOperationAsync();
+
+
+                if (App.latestRates == null)
+                {
+                    App.latestRates = await App.getDeserializedLatesRates;
+                    //DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(App.latestRates.Timestamp);
+                    //TimeRefreshed = DateTime.Parse(App.latestRates.Timestamp).ToShortDateString();
+                    TimeRefreshed = DateTime.Now.ToString();
+                }
+                else
+                {
+                    if (Refresh)
+                    {
+                        App.latestRates = await App.getDeserializedLatesRates;
+                        TimeRefreshed = DateTime.Now.ToString();
+                    }
+                    else
+                        return;
+                }
+
                 if (!await PinnedList.LoadList())
                 {
                     Debug.WriteLine("Failed to load PinnedList");
@@ -47,6 +83,7 @@ namespace ExchangeRateUWP
                 LoadingIndicator.Visibility = Visibility.Collapsed;
             }
             //await Task.Delay(500);
+            contentAGridView.Items.Clear();
             foreach (var rate in App.latestRates.Rates)
             {
             tryagain:
@@ -55,7 +92,8 @@ namespace ExchangeRateUWP
                     var cbp = new CurrencyBlockPage(App.currencies.CurrencyMeaning[rate.Key], rate.Value.ToString())
                     {
                         Name = $"uc_CB_{rate.Key}",
-                        IsPinned = PinnedList.AbbList.Contains(GenerateCountryAbbreviationFromCurrency(App.currencies.CurrencyMeaning[rate.Key]))
+                        //IsPinned = (bool) PinnedList.AbbList?.Contains(GenerateCountryAbbreviationFromCurrency(App.currencies.CurrencyMeaning[rate.Key]))
+                        IsPinned = PinnedList.AbbList == null ? false : PinnedList.AbbList.Contains(GenerateCountryAbbreviationFromCurrency(App.currencies.CurrencyMeaning[rate.Key]))
                     };
                     cbp.PointerReleased += Cbp_PointerReleased;
                     contentAGridView.Items.Add(cbp);
@@ -197,6 +235,5 @@ namespace ExchangeRateUWP
 
             }
         }
-
     }
 }
