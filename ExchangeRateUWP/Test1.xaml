@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="ExchangeRateUWP.HistoryPage"
+    x:Class="ExchangeRateUWP.Test1"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:ExchangeRateUWP"
@@ -13,7 +13,8 @@
         <AcrylicBrush x:Key="NavigationViewDefaultPaneBackground"
               BackgroundSource="Backdrop" TintColor="#FF2C5641" TintOpacity="0.645"/>
     </Page.Resources>
-    <Grid x:Name="contentGrid">
-        <ProgressRing Name="HistoryPageProgressRing" Width="150" Height="150" BorderBrush="White" Canvas.ZIndex="17"/>
+    <Grid>
+        <ProgressBar Height="30" IsIndeterminate="True" Margin="40,108,149,0" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment, LeftPosition, RightPosition" Value="34"/>
+        <ProgressRing Name="pr_progressRing" Height="150" Width="150" />
     </Grid>
 </Page>

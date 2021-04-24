@@ -41,13 +41,14 @@ namespace ExchangeRateUWP
 
         private async void ContentGrid_Loaded(object sender, RoutedEventArgs e)
         {
-            var temp = "";
-            foreach (var item in GetLast7DaysFrom(DateTime.Now))
-            {
-                results.Add(await GetLatestRatesString(item.ToString()));
-                temp += await GetLatestRatesString(item.ToString());
-            }
-            var a = JsonConvert.DeserializeObject<List<LatestRate>>(temp);
+            if (LastWeekData != null)
+                return;
+
+            HistoryPageProgressRing.Visibility = Visibility.Visible;
+            HistoryPageProgressRing.IsActive = true;
+            Loadd();
+            HistoryPageProgressRing.IsActive = false;
+            HistoryPageProgressRing.Visibility = Visibility.Collapsed;
         }
         static IEnumerable GetLast7DaysFrom(DateTime start)
         {
@@ -61,6 +62,33 @@ namespace ExchangeRateUWP
 
                 yield return day;
             }
+        }
+        private async void Loadd()
+        {
+            var temp = "";
+            foreach (var item in GetLast7DaysFrom(DateTime.Now))
+            {
+                results.Add(await GetLatestRatesString(item.ToString()));
+                temp = await GetLatestRatesString(item.ToString());
+                try
+                {
+                    if (!String.IsNullOrEmpty(temp))
+                    {
+                        var a = JsonConvert.DeserializeObject<LatestRate>(temp);
+                        LastWeekData.Add(a);
+                        //LastWeekData.Add(JsonConvert.DeserializeObject<LatestRate>(temp));
+                    }
+                    else
+                    {
+
+                    }
+                }
+                catch (Exception ecc)
+                {
+                    Console.WriteLine(ecc.Message);
+                }
+            }
+            LastWeekData.OrderBy(x => x.Timestamp);
         }
         static async Task<LatestRate> GetLatestRates(string input)
         {
